@@ -47,7 +47,7 @@
     "queue-cb": "*",
     "resolve-bin-sync": "*",
     "sort-package-json": "*",
-    "tsds-biome": "^1.18.0",
+    "tsds-biome": "^1.18.1",
     "tsds-build": "^1.20.0",
     "tsds-lib": "*",
     "tsds-typedoc": "*"

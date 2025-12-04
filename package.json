@@ -1,6 +1,6 @@
 {
   "name": "tsds-validate",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "Development stack for TypeScript libraries",
   "keywords": [
     "c8",

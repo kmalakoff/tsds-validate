@@ -28,6 +28,7 @@
     "./package.json": "./package.json"
   },
   "main": "dist/cjs/index.js",
+  "source": "src/index.ts",
   "types": "dist/cjs/index.d.ts",
   "files": [
     "dist"
@@ -47,7 +48,7 @@
     "resolve-bin-sync": "*",
     "sort-package-json": "*",
     "tsds-biome": "^1.18.0",
-    "tsds-build": "^1.19.4",
+    "tsds-build": "^1.20.0",
     "tsds-lib": "*",
     "tsds-typedoc": "*"
   },
@@ -68,8 +69,5 @@
   },
   "engines": {
     "node": ">=0.8"
-  },
-  "tsds": {
-    "source": "src/index.ts"
   }
 }

@@ -56,7 +56,7 @@ function addTests(repo) {
         // validate runs: format, build, sort-package-json, depcheck, docs
         validate([], { cwd: dest }, (err?: Error): undefined => {
           if (err) {
-            done(err.message);
+            done(err);
             return;
           }
           // Verify dist and docs folders were created

@@ -42,30 +42,27 @@
     "version": "tsds version"
   },
   "dependencies": {
-    "cross-spawn-cb": "*",
-    "depcheck": "*",
-    "queue-cb": "*",
-    "resolve-bin-sync": "*",
-    "sort-package-json": "*",
+    "cross-spawn-cb": "^2.4.14",
+    "depcheck": "^1.4.7",
+    "queue-cb": "^1.6.3",
+    "resolve-bin-sync": "^1.0.12",
+    "sort-package-json": "^3.5.1",
     "tsds-biome": "^1.20.2",
     "tsds-build": "^1.20.4",
-    "tsds-lib": "*",
-    "tsds-typedoc": "*"
+    "tsds-lib": "^1.20.0",
+    "tsds-typedoc": "^1.20.3"
   },
   "devDependencies": {
-    "@types/mocha": "*",
-    "@types/node": "*",
-    "mocha": "*",
-    "mocha-compat": "*",
-    "module-link-unlink": "*",
-    "node-version-use": "*",
-    "os-shim": "*",
-    "resolve": "*",
-    "short-hash": "*",
-    "ts-dev-stack": "*",
-    "ts-swc-loaders": "*",
-    "tsds-config": "*",
-    "tsds-lib-test": "*"
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^25.0.1",
+    "module-link-unlink": "^1.0.11",
+    "node-version-use": "^2.1.6",
+    "os-shim": "^0.1.3",
+    "resolve": "^1.22.11",
+    "short-hash": "^1.0.0",
+    "ts-dev-stack": "^1.21.3",
+    "tsds-config": "^0.2.1",
+    "tsds-lib-test": "^1.19.5"
   },
   "engines": {
     "node": ">=0.8"

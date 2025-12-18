@@ -1,5 +1,5 @@
 import spawn from 'cross-spawn-cb';
-import { wrap } from 'node-version-call';
+import { bind } from 'node-version-call';
 import path from 'path';
 import Queue from 'queue-cb';
 import resolveBin from 'resolve-bin-sync';
@@ -10,12 +10,10 @@ import docs from 'tsds-typedoc';
 import url from 'url';
 
 const major = +process.versions.node.split('.')[0];
-const version = major > 18 ? 'local' : 'stable';
 const __dirname = path.dirname(typeof __filename === 'undefined' ? url.fileURLToPath(import.meta.url) : __filename);
 const dist = path.join(__dirname, '..');
-const workerWrapper = wrap(path.join(dist, 'cjs', 'command.js'));
 
-function worker(args: string[], options: CommandOptions, callback: CommandCallback) {
+function run(args: string[], options: CommandOptions, callback: CommandCallback) {
   try {
     const depcheck = resolveBin('depcheck');
     const sortPackageJSON = resolveBin('sort-package-json');
@@ -33,6 +31,8 @@ function worker(args: string[], options: CommandOptions, callback: CommandCallba
   }
 }
 
+const worker = major >= 20 ? run : bind('>=20', path.join(dist, 'cjs', 'command.js'), { callbacks: true });
+
 export default function publish(args: string[], options: CommandOptions, callback: CommandCallback) {
-  version !== 'local' ? workerWrapper(version, args, options, callback) : worker(args, options, callback);
+  worker(args, options, callback);
 }

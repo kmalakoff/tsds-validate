@@ -42,9 +42,9 @@
     "version": "tsds version"
   },
   "dependencies": {
-    "cross-spawn-cb": "^2.0.0",
+    "cross-spawn-cb": "^3.0.0",
     "depcheck": "^1.4.7",
-    "node-version-call": "^1.11.0",
+    "node-version-call": "^2.0.0",
     "queue-cb": "^1.0.0",
     "resolve-bin-sync": "^1.0.12",
     "sort-package-json": "^3.6.0",

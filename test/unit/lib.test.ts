@@ -55,10 +55,8 @@ function addTests(repo) {
       it('validate', (done) => {
         // validate runs: format, build, sort-package-json, depcheck, docs
         validate([], { cwd: dest }, (err?: Error): void => {
-          if (err) {
-            done(err);
-            return;
-          }
+          if (err) return done(err);
+
           // Verify dist and docs folders were created
           assert.ok(fs.existsSync(path.join(dest, 'dist')), 'dist folder should exist');
           assert.ok(fs.existsSync(path.join(dest, 'docs')), 'docs folder should exist');

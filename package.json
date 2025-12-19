@@ -44,14 +44,14 @@
   "dependencies": {
     "cross-spawn-cb": "^3.0.0",
     "depcheck": "^1.4.7",
-    "node-version-call": "^2.1.0",
+    "node-version-call": "^3.0.0",
     "queue-cb": "^1.6.3",
     "resolve-bin-sync": "^1.0.12",
-    "sort-package-json": "^3.6.0",
-    "tsds-biome": "^1.21.0",
-    "tsds-build": "^1.21.0",
+    "sort-package-json": "2.15.1",
+    "tsds-biome": "^1.21.1",
+    "tsds-build": "^1.21.1",
     "tsds-lib": "^1.21.1",
-    "tsds-typedoc": "^1.20.4"
+    "tsds-typedoc": "^1.20.5"
   },
   "devDependencies": {
     "@types/mocha": "*",

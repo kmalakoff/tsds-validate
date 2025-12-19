@@ -1,4 +1,4 @@
-import spawn from 'cross-spawn-cb';
+import spawn, { type SpawnError } from 'cross-spawn-cb';
 import { bind } from 'node-version-call';
 import path from 'path';
 import Queue from 'queue-cb';
@@ -17,22 +17,26 @@ function run(args: string[], options: CommandOptions, callback: CommandCallback)
   try {
     const depcheck = resolveBin('depcheck');
     const sortPackageJSON = resolveBin('sort-package-json');
+    const spawnOptions = { ...options, encoding: 'utf8' };
 
     const queue = new Queue(1);
     queue.defer(format.bind(null, args, options));
     queue.defer(build.bind(null, args, options));
-    queue.defer(spawn.bind(null, sortPackageJSON, [], options));
-    queue.defer(spawn.bind(null, depcheck, [], options));
+    queue.defer(spawn.bind(null, sortPackageJSON, [], spawnOptions));
+    queue.defer(spawn.bind(null, depcheck, [], spawnOptions));
     queue.defer(docs.bind(null, args, options));
     queue.await(callback);
   } catch (err) {
-    console.log(err.message);
     return callback(err);
   }
 }
 
-const worker = major >= 20 ? run : bind('>=20', path.join(dist, 'cjs', 'command.js'), { callbacks: true });
+// Node 20.10+ required for import attributes syntax used by sort-package-json
+const worker = major >= 20 ? run : bind('>=10', path.join(dist, 'cjs', 'command.js'), { callbacks: true });
 
 export default function publish(args: string[], options: CommandOptions, callback: CommandCallback) {
-  worker(args, options, callback);
+  worker(args, options, (err: SpawnError) => {
+    if (err) console.log(err.stderr || err.message);
+    callback(err);
+  });
 }

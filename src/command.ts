@@ -25,18 +25,19 @@ function run(args: string[], options: CommandOptions, callback: CommandCallback)
     queue.defer(spawn.bind(null, sortPackageJSON, [], spawnOptions));
     queue.defer(spawn.bind(null, depcheck, [], spawnOptions));
     queue.defer(docs.bind(null, args, options));
-    queue.await(callback);
+    queue.await((err: SpawnError) => {
+      err ? callback(new Error(String(err.stderr) || err.message)) : callback();
+    });
   } catch (err) {
     return callback(err);
   }
 }
 
-// Node 20.10+ required for import attributes syntax used by sort-package-json
-const worker = major >= 20 ? run : bind('>=10', path.join(dist, 'cjs', 'command.js'), { callbacks: true });
+const worker = major >= 20 ? run : bind('>=20', path.join(dist, 'cjs', 'command.js'), { callbacks: true });
 
 export default function publish(args: string[], options: CommandOptions, callback: CommandCallback) {
-  worker(args, options, (err: SpawnError) => {
-    if (err) console.log(err.stderr || err.message);
+  worker(args, options, (err: Error) => {
+    if (err) console.log(err.message);
     callback(err);
   });
 }

@@ -39,7 +39,7 @@ const worker = (major >= 20 ? run : bind('>=20', path.join(dist, 'cjs', 'command
 
 export default function publish(args: string[], options: CommandOptions, callback: CommandCallback) {
   worker(args, options, (err: Error) => {
-    if (err) console.log(err.message);
+    if (err && err.message) console.log(err.message);
     callback(err);
   });
 }

@@ -26,7 +26,11 @@ function run(args: string[], options: CommandOptions, callback: CommandCallback)
     queue.defer(spawn.bind(null, depcheck, [], spawnOptions));
     queue.defer(docs.bind(null, args, options));
     queue.await((err: SpawnError) => {
-      err ? callback(new Error(String(err.stderr) || err.message)) : callback();
+      if (err) {
+        const errorMessage = (err.stderr as string) || err.message || err.toString() || 'Validation failed';
+        return callback(new Error(errorMessage));
+      }
+      callback();
     });
   } catch (err) {
     return callback(err);

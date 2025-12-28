@@ -42,8 +42,5 @@ type commandFunction = (args: string[], options: CommandOptions, callback: Comma
 const worker = (major >= 20 ? run : bind('>=20', path.join(dist, 'cjs', 'command.js'), { callbacks: true })) as commandFunction;
 
 export default function publish(args: string[], options: CommandOptions, callback: CommandCallback) {
-  worker(args, options, (err: Error) => {
-    if (err && err.message) console.log(err.message);
-    callback(err);
-  });
+  worker(args, options, callback);
 }

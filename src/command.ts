@@ -17,7 +17,7 @@ function run(args: string[], options: CommandOptions, callback: CommandCallback)
   try {
     const depcheck = resolveBin('depcheck');
     const sortPackageJSON = resolveBin('sort-package-json');
-    const spawnOptions = { ...options, encoding: 'utf8' };
+    const spawnOptions = { ...options, encoding: 'utf8' as BufferEncoding };
 
     const queue = new Queue(1);
     queue.defer(format.bind(null, args, options));
@@ -25,15 +25,16 @@ function run(args: string[], options: CommandOptions, callback: CommandCallback)
     queue.defer(spawn.bind(null, sortPackageJSON, [], spawnOptions));
     queue.defer(spawn.bind(null, depcheck, [], spawnOptions));
     queue.defer(docs.bind(null, args, options));
-    queue.await((err: SpawnError) => {
+    queue.await((err?: Error) => {
       if (err) {
-        const errorMessage = (err.stderr as string) || err.message || err.toString() || 'Validation failed';
+        const spawnErr = err as SpawnError;
+        const errorMessage = (spawnErr.stderr as string | undefined) || err.message || err.toString() || 'Validation failed';
         return callback(new Error(errorMessage));
       }
       callback();
     });
   } catch (err) {
-    return callback(err);
+    return callback(err instanceof Error ? err : new Error(String(err)));
   }
 }
 

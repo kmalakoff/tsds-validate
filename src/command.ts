@@ -25,7 +25,7 @@ function run(args: string[], options: CommandOptions, callback: CommandCallback)
     queue.defer(spawn.bind(null, sortPackageJSON, [], spawnOptions));
     queue.defer(spawn.bind(null, depcheck, [], spawnOptions));
     queue.defer(docs.bind(null, args, options));
-    queue.await((err?: Error) => {
+    queue.await((err?: Error | null) => {
       if (err) {
         const spawnErr = err as SpawnError;
         const errorMessage = (spawnErr.stderr as string | undefined) || err.message || err.toString() || 'Validation failed';

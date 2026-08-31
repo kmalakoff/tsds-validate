@@ -1,1 +1,1 @@
-ignores: ["node-version-use", "ts-dev-stack", "tsds-validate", "depcheck", "sort-package-json", "resolve-bin-sync", "ts-swc-loaders"]
+ignores: ["tsds-validate", "node-version-use", "ts-dev-stack", "depcheck", "sort-package-json", "resolve-bin-sync", "ts-swc-loaders"]

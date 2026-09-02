@@ -14,17 +14,17 @@ const __dirname = path.dirname(typeof __filename === 'undefined' ? url.fileURLTo
 const dist = path.join(__dirname, '..');
 const workerWrapper = wrapWorker(path.join(dist, 'cjs', 'command.js'));
 
-function worker(_args: string[], options: CommandOptions, callback: CommandCallback) {
+function worker(args: string[], options: CommandOptions, callback: CommandCallback) {
   try {
     const depcheck = resolveBin('depcheck');
     const sortPackageJSON = resolveBin('sort-package-json');
 
     const queue = new Queue(1);
-    queue.defer(format.bind(null, [], options));
-    queue.defer(build.bind(null, [], options));
+    queue.defer(format.bind(null, args, options));
+    queue.defer(build.bind(null, args, options));
     queue.defer(spawn.bind(null, sortPackageJSON, [], options));
     queue.defer(spawn.bind(null, depcheck, [], options));
-    queue.defer(docs.bind(null, [], options));
+    queue.defer(docs.bind(null, args, options));
     queue.await(callback);
   } catch (err) {
     console.log(err.message);

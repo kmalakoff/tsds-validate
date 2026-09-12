@@ -12,10 +12,10 @@
     "test",
     "typescript"
   ],
-  "homepage": "https://github.com/kmalakoff/ts-dev-stack",
+  "homepage": "https://github.com/kmalakoff/tsds-validate",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kmalakoff/ts-dev-stack.git"
+    "url": "git+ssh://git@github.com/kmalakoff/tsds-validate.git"
   },
   "license": "MIT",
   "author": "Kevin Malakoff <kmalakoff@gmail.com> (https://github.com/kmalakoff)",
@@ -46,7 +46,7 @@
     "queue-cb": "*",
     "resolve-bin-sync": "*",
     "sort-package-json": "*",
-    "tsds-biome": "^1.17.11",
+    "tsds-biome": "^1.18.0",
     "tsds-build": "^1.19.4",
     "tsds-lib": "*",
     "tsds-typedoc": "*"
